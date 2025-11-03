@@ -6,7 +6,7 @@ const profile = {
   links: [
     {
       id: "1",
-      title: "Website",
+      title: "BJJ Open Mats",
       url: "https://bjjom.de/",
       desc: "BJJ-Community",
       color: "#4268e5ff",
