@@ -11,7 +11,7 @@ const profile = {
   ]
 };
 
-// DOM-Elemente
+// DOM-Elementee
 const nameEl = document.getElementById('name');
 const bioEl = document.getElementById('bio');
 const avatarEl = document.querySelector('.avatar');
