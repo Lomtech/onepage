@@ -5,9 +5,9 @@ const profile = {
   avatar: "assets/avatar.jpg",
   links: [
     { id: "1", title: "Website", url: "https://bjjom.de/", desc: "BJJ-Community", color: "#4268e5ff" },
-    { id: "2", title: "x.com", url: "https://twitter.com/example", desc: "@example", color: "#dadadaff" },
-    { id: "3", title: "TikTok", url: "https://blog.example.com", desc: "Gedanken & Tutorials", color: "#28e028ff" },
-    { id: "4", title: "Instagram", url: "https://blog.example.com", desc: "Gedanken & Tutorials", color: "#e57adcff" }
+    { id: "2", title: "x.com", url: "https://x.com/LImadaev97219", desc: "@example", color: "#dadadaff" },
+    { id: "3", title: "TikTok", url: "https://www.tiktok.com/@lom1923?lang=de-DE", desc: "Gedanken & Tutorials", color: "#28e028ff" },
+    { id: "4", title: "Instagram", url: "https://www.instagram.com/lomcombatgrappler/", desc: "Gedanken & Tutorials", color: "#e57adcff" }
   ]
 };
 
