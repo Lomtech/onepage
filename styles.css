@@ -156,7 +156,7 @@ p {
 
 /* Footer */
 .footer {
-  margin-top: 18px;
+  margin-top: 0px;
   text-align: center;
   color: var(--muted);
   font-size: 0.85rem;
