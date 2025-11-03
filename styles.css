@@ -43,7 +43,7 @@ body {
   max-width: 460px;
   background: var(--card);
   border-radius: var(--radius);
-  padding: 40px;
+  padding: 20px;
   box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
 }
 
