@@ -41,7 +41,7 @@ const bioEl = document.getElementById("bio");
 const avatarEl = document.querySelector(".avatar");
 const linksContainer = document.getElementById("links");
 const copyBtn = document.getElementById("copyUrlBtn");
-const themeToggle = document.getElementById("themeToggle");
+// const themeToggle = document.getElementById("themeToggle");
 
 // Init
 nameEl.textContent = profile.name;
