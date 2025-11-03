@@ -94,14 +94,14 @@ copyBtn.addEventListener('click', async () => {
   }
 });
 
-// Theme toggle (extra)
-themeToggle.addEventListener('click', () => {
-  if(document.documentElement.hasAttribute('data-theme')) {
-    document.documentElement.removeAttribute('data-theme');
-    themeToggle.textContent = 'Theme';
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    // when attribute present, you can override vars via CSS if desired
-    themeToggle.textContent = 'System';
-  }
-});
+// // Theme toggle (extra)
+// themeToggle.addEventListener('click', () => {
+//   if(document.documentElement.hasAttribute('data-theme')) {
+//     document.documentElement.removeAttribute('data-theme');
+//     themeToggle.textContent = 'Theme';
+//   } else {
+//     document.documentElement.setAttribute('data-theme', 'dark');
+//     // when attribute present, you can override vars via CSS if desired
+//     themeToggle.textContent = 'System';
+//   }
+// });
