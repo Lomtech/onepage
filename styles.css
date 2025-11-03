@@ -43,7 +43,7 @@ body {
   max-width: 460px;
   background: var(--card);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 40px;
   box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
 }
 
@@ -157,7 +157,6 @@ p {
 /* Footer */
 .footer {
   margin-top: 18px;
-  margin-bottom: 18px;
   text-align: center;
   color: var(--muted);
   font-size: 0.85rem;
