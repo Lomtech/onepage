@@ -1,12 +1,13 @@
 // Daten: später per fetch/JSON oder Backend ersetzbar
 const profile = {
-  name: "Max Mustermann",
-  bio: "Designer · Webdev · Kaffee-Liebhaber — Hier meine wichtigsten Links.",
+  name: "Lom-Ali Imadaev",
+  bio: "Combat Grappler · Senior SAP-Consultant · ABAP-Entwickler · Webdev · Kaffee-Liebhaber — Hier meine wichtigsten Links.",
   avatar: "assets/avatar.jpg",
   links: [
-    { id: "1", title: "Portfolio", url: "https://example.com", desc: "Meine Arbeiten", color: "#FFD166" },
-    { id: "2", title: "Twitter", url: "https://twitter.com/example", desc: "@example", color: "#4dabf7" },
-    { id: "3", title: "Blog", url: "https://blog.example.com", desc: "Gedanken & Tutorials", color: "#7ae582" }
+    { id: "1", title: "Website", url: "https://bjjom.de/", desc: "BJJ-Community", color: "#4268e5ff" },
+    { id: "2", title: "x.com", url: "https://twitter.com/example", desc: "@example", color: "#dadadaff" },
+    { id: "3", title: "TikTok", url: "https://blog.example.com", desc: "Gedanken & Tutorials", color: "#28e028ff" },
+    { id: "4", title: "Instagram", url: "https://blog.example.com", desc: "Gedanken & Tutorials", color: "#e57adcff" }
   ]
 };
 
