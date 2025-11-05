@@ -95,7 +95,7 @@ if (fs.existsSync("dashboard.js")) {
   const resultDashboardJs = dashboardJs
     .replace("SUPABASE_URL_PLACEHOLDER", process.env.SUPABASE_URL || "")
     .replace("SUPABASE_KEY_PLACEHOLDER", process.env.SUPABASE_ANON_KEY || "")
-    .replace("EMAIL_PLACEHOLDER", process.env.EMAIL || "");
+    .replace("ALLOWED_EMAIL_PLACEHOLDER", process.env.ALLOWED_EMAIL || "");
   fs.writeFileSync(path.join(buildDir, "dashboard.js"), resultDashboardJs);
   console.log("   ✓ dashboard.js");
 } else {
@@ -112,6 +112,10 @@ console.log(
 console.log(
   "   SUPABASE_ANON_KEY:",
   process.env.SUPABASE_ANON_KEY ? "✓ gesetzt" : "✗ fehlt"
+);
+console.log(
+  "   ALLOWED_EMAIL:",
+  process.env.ALLOWED_EMAIL ? "✓ gesetzt" : "✗ fehlt"
 );
 
 console.log("\n📦 Build-Inhalt:");
