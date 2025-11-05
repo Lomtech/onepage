@@ -438,7 +438,7 @@ function showStatus(message, type) {
   statusDiv.className = `status-message ${type}`;
 }
 
-// === SHOW ERROR ===
+// === SHOW ERROR ===s
 function showError(message) {
   alert("❌ Fehler: " + message);
 }
