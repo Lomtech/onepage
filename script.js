@@ -5,28 +5,28 @@ const profile = {
   avatar: "assets/avatar.jpg",
   links: [
     {
-      id: "1",
+      id: "bjj-open-mats",
       title: "BJJ Open Mats",
       url: "https://bjjom.de/",
       desc: "BJJ-Community",
       color: "#4268e5ff",
     },
     {
-      id: "2",
+      id: "x-twitter",
       title: "x.com",
       url: "https://x.com/LImadaev97219",
       desc: "@LImadaev97219",
       color: "#dadadaff",
     },
     {
-      id: "3",
+      id: "tiktok",
       title: "TikTok",
       url: "https://www.tiktok.com/@lom1923?lang=de-DE",
       desc: "Gedanken zu Kampfsport",
       color: "#28e028ff",
     },
     {
-      id: "4",
+      id: "instagram",
       title: "Instagram",
       url: "https://www.instagram.com/lomcombatgrappler/",
       desc: "Mein IG-Profil",
@@ -35,30 +35,22 @@ const profile = {
   ],
 };
 
-// DOM-Elementee
+// DOM-Elemente
 const nameEl = document.getElementById("name");
 const bioEl = document.getElementById("bio");
 const avatarEl = document.querySelector(".avatar");
 const linksContainer = document.getElementById("links");
 const copyBtn = document.getElementById("copyUrlBtn");
-// const themeToggle = document.getElementById("themeToggle");
 
 // Init
 nameEl.textContent = profile.name;
 bioEl.textContent = profile.bio;
 avatarEl.src = profile.avatar || "assets/avatar.jpg";
 
-// Klick-Zähler mit localStorage (einfach)
-const storageKey = "link_clicks_v1";
-const clicks = JSON.parse(localStorage.getItem(storageKey) || "{}");
-
-function saveClicks() {
-  localStorage.setItem(storageKey, JSON.stringify(clicks));
-}
-
 // Render Links
 function renderLinks() {
   linksContainer.innerHTML = "";
+
   profile.links.forEach((link) => {
     const a = document.createElement("a");
     a.className = "link";
@@ -83,28 +75,41 @@ function renderLinks() {
     meta.appendChild(title);
     meta.appendChild(desc);
 
+    // Counter (wird später vom Dashboard gezeigt)
     const counter = document.createElement("div");
     counter.className = "counter";
-    counter.textContent = `${clicks[link.id] || 0} clicks`;
+    const localClicks = window.analytics.getLocalClickStats(link.id);
+    counter.textContent = `${localClicks} clicks`;
 
     a.appendChild(icon);
     a.appendChild(meta);
     a.appendChild(counter);
 
-    // Klick-Handler: Zähler erhöhen
-    a.addEventListener("click", (e) => {
-      // Zähler client-side erhöhen — falls du server-analytics willst, sende fetch POST
-      clicks[link.id] = (clicks[link.id] || 0) + 1;
-      saveClicks();
-      counter.textContent = `${clicks[link.id]} clicks`;
-      // Link öffnet normal in neuem Tab
+    // Klick-Handler mit Analytics
+    a.addEventListener("click", async (e) => {
+      // Analytics tracken (non-blocking)
+      if (window.analytics) {
+        window.analytics.trackLinkClick(link.id);
+      }
+
+      // LocalStorage als Fallback
+      const newCount = window.analytics.saveLocalClickStats(link.id);
+      counter.textContent = `${newCount} clicks`;
+
+      // Link öffnet normal in neuem Tab (default behavior)
     });
 
     linksContainer.appendChild(a);
   });
 }
 
-renderLinks();
+// Warte bis Analytics bereit ist
+if (window.analytics) {
+  renderLinks();
+} else {
+  // Fallback falls Analytics nicht lädt
+  setTimeout(renderLinks, 100);
+}
 
 // Copy profile URL
 copyBtn.addEventListener("click", async () => {
@@ -117,17 +122,3 @@ copyBtn.addEventListener("click", async () => {
     alert("Kopieren fehlgeschlagen: " + e);
   }
 });
-
-document.documentElement.removeAttribute("dark-theme");
-
-// // Theme toggle (extra)
-// themeToggle.addEventListener('click', () => {
-//   if(document.documentElement.hasAttribute('data-theme')) {
-//     document.documentElement.removeAttribute('data-theme');
-//     themeToggle.textContent = 'Theme';
-//   } else {
-//     document.documentElement.setAttribute('data-theme', 'dark');
-//     // when attribute present, you can override vars via CSS if desired
-//     themeToggle.textContent = 'System';
-//   }
-// });
