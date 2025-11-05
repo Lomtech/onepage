@@ -1,13 +1,13 @@
-# netlify.toml - Einfache Konfiguration
+# netlify.toml – angepasste Konfiguration für dein Build-Skript
 
 [build]
-  publish = "."
+  command = "node build.js"
+  publish = "build"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
 
 [[headers]]
   for = "/*"
