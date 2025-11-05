@@ -14,7 +14,6 @@ fs.copyFileSync('styles.css', 'dist/styles.css');
 // Kopiere Legal Pages
 fs.copyFileSync('datenschutz.html', 'dist/datenschutz.html');
 fs.copyFileSync('impressum.html', 'dist/impressum.html');
-fs.copyFileSync('agb.html', 'dist/agb.html');
 
 // Lese app.js und ersetze Platzhalter
 const js = fs.readFileSync('app.js', 'utf8');
