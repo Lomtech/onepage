@@ -2,7 +2,7 @@
 
 [build]
   # Build command
-  command = "chmod +x build.sh && ./build.sh"
+  command = "node build.js"
   
   # Publish directory
   publish = "build"

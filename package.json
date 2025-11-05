@@ -1,0 +1,13 @@
+{
+  "name": "link-in-bio",
+  "version": "1.0.0",
+  "description": "Link-in-Bio with Analytics Dashboard",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "author": "Lom-Ali Imadaev",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
