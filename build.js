@@ -37,7 +37,7 @@ const filesToCopy = [
   "datenschutz.html",
   "styles.css",
   "dashboard.css",
-  "script.js",
+  "app.js",
   "analytics.js",
   "dashboard.js",
 ];
