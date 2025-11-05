@@ -1,7 +1,7 @@
 // analytics.js - Supabase Analytics Tracking
 // Netlify injiziert Umgebungsvariablen zur Build-Zeit
 
-// WICHTIG: Diese Werte werden von Netlify zur BUILD-Zeit ersetzt
+// WICHTIG: Diese Werte werden von Netlify zur BUILD-Zeit ersetzts
 // Setze in Netlify: Site settings -> Environment variables -> Build variables
 const SUPABASE_URL =
   import.meta.env?.SUPABASE_URL || "SUPABASE_URL_PLACEHOLDER";
