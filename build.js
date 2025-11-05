@@ -89,32 +89,8 @@ let appJs = fs.readFileSync(path.join(__dirname, appJsSource), "utf8");
 // Ersetze Credentials
 appJs = appJs.replace(/DEIN_SUPABASE_URL/g, SUPABASE_URL);
 appJs = appJs.replace(/DEIN_SUPABASE_ANON_KEY/g, SUPABASE_ANON_KEY);
-appJs = appJs.replace(
-  /DEIN_STRIPE_PUBLISHABLE_KEY/g,
-  STRIPE_PUBLISHABLE_KEY || "DEIN_STRIPE_PUBLISHABLE_KEY"
-);
 
-// Ersetze Price IDs (beide Varianten für Kompatibilität)
-if (STRIPE_PRICE_BASIC) {
-  appJs = appJs.replace(/price_BASIC_ID/g, STRIPE_PRICE_BASIC);
-  appJs = appJs.replace(/price_COACH_BASIC_ID/g, STRIPE_PRICE_BASIC);
-  appJs = appJs.replace(/price_CUSTOMER_BASIC_ID/g, STRIPE_PRICE_BASIC);
-  console.log("   ✅ STRIPE_PRICE_BASIC ersetzt");
-}
 
-if (STRIPE_PRICE_PREMIUM) {
-  appJs = appJs.replace(/price_PREMIUM_ID/g, STRIPE_PRICE_PREMIUM);
-  appJs = appJs.replace(/price_COACH_PREMIUM_ID/g, STRIPE_PRICE_PREMIUM);
-  appJs = appJs.replace(/price_CUSTOMER_PREMIUM_ID/g, STRIPE_PRICE_PREMIUM);
-  console.log("   ✅ STRIPE_PRICE_PREMIUM ersetzt");
-}
-
-if (STRIPE_PRICE_ELITE) {
-  appJs = appJs.replace(/price_ELITE_ID/g, STRIPE_PRICE_ELITE);
-  appJs = appJs.replace(/price_COACH_ELITE_ID/g, STRIPE_PRICE_ELITE);
-  appJs = appJs.replace(/price_CUSTOMER_ELITE_ID/g, STRIPE_PRICE_ELITE);
-  console.log("   ✅ STRIPE_PRICE_ELITE ersetzt");
-}
 
 // Schreibe app.js
 fs.writeFileSync(path.join(distDir, "app.js"), appJs);
