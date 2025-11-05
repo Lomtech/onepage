@@ -11,6 +11,9 @@ fs.copyFileSync('index.html', 'dist/index.html');
 // Kopiere CSS
 fs.copyFileSync('styles.css', 'dist/styles.css');
 
+// Avatar
+fs.copyFileSync('avatar.jpg', 'dist/avatar.jpg');
+
 // Kopiere Legal Pages
 fs.copyFileSync('datenschutz.html', 'dist/datenschutz.html');
 fs.copyFileSync('impressum.html', 'dist/impressum.html');
