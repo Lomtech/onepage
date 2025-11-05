@@ -6,32 +6,40 @@ const SUPABASE_ANON_KEY = "SUPABASE_KEY_PLACEHOLDER";
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 App initialized");
 
-  // Analytics nur laden wenn Einwilligung vorliegt
+  // Prüfe Analytics-Einwilligung
   const consent = localStorage.getItem("analytics_consent");
+
   if (consent === "accepted") {
+    // Einwilligung vorhanden → Analytics laden
+    console.log(
+      "✅ Analytics-Einwilligung vorhanden - Analytics wird initialisiert"
+    );
     window.analytics = new Analytics();
     loadClickCounts(); // Zähler laden
   } else {
+    // Keine Einwilligung → Analytics deaktiviert
     console.log("⏸️ Analytics wartet auf Einwilligung");
-    window.analytics = { disabled: true }; // Dummy-Objekt
+    window.analytics = { disabled: true, trackLinkClick: () => {} }; // Dummy-Objekt
   }
-  window.analytics = new Analytics();
-
-  // Initiale Zähler laden (Fallback)
-  loadClickCounts();
 
   // Klick-Events für alle Links
   document.querySelectorAll(".link").forEach((link) => {
     link.addEventListener("click", (e) => {
       const linkId = link.dataset.id;
-      incrementClick(linkId);
-      analytics.trackLinkClick(linkId); // Track in Supabase
+
+      // Nur tracken wenn Einwilligung vorliegt
+      if (consent === "accepted") {
+        incrementClick(linkId);
+        analytics.trackLinkClick(linkId);
+      }
     });
   });
 
   // Copy Button
   const copyBtn = document.getElementById("copyBtn");
-  copyBtn.addEventListener("click", copyUrl);
+  if (copyBtn) {
+    copyBtn.addEventListener("click", copyUrl);
+  }
 });
 
 // === LOCAL FALLBACK CLICK COUNT ===
@@ -40,7 +48,9 @@ function loadClickCounts() {
     const linkId = link.dataset.id;
     const count = getClickCount(linkId);
     const counter = link.querySelector(".counter");
-    counter.textContent = count;
+    if (counter) {
+      counter.textContent = count;
+    }
   });
 }
 
@@ -55,8 +65,12 @@ function incrementClick(linkId) {
   localStorage.setItem("linkClicks", JSON.stringify(counts));
 
   const link = document.querySelector(`[data-id="${linkId}"]`);
-  const counter = link.querySelector(".counter");
-  counter.textContent = counts[linkId];
+  if (link) {
+    const counter = link.querySelector(".counter");
+    if (counter) {
+      counter.textContent = counts[linkId];
+    }
+  }
 
   console.log(`✅ Click tracked locally: ${linkId} = ${counts[linkId]}`);
 }
@@ -78,6 +92,7 @@ async function copyUrl() {
 // === ANALYTICS CLASS ===
 class Analytics {
   constructor() {
+    // Prüfe ob Supabase SDK geladen ist
     if (typeof window.supabase === "undefined") {
       console.warn("⚠️ Supabase SDK not loaded, running fallback");
       this.disabled = true;
@@ -85,9 +100,10 @@ class Analytics {
       return;
     }
 
+    // Prüfe ob Supabase-Keys konfiguriert sind
     if (
-      SUPABASE_URL.includes("YOUR_PROJECT_ID") ||
-      SUPABASE_ANON_KEY.includes("YOUR_SUPABASE_ANON_KEY")
+      SUPABASE_URL.includes("PLACEHOLDER") ||
+      SUPABASE_ANON_KEY.includes("PLACEHOLDER")
     ) {
       console.warn("⚠️ Supabase keys not configured");
       this.disabled = true;
@@ -111,7 +127,7 @@ class Analytics {
     if (!this.disabled) this.trackPageVisit();
   }
 
-  // Session ID
+  // === Session ID ===
   getOrCreateSessionId() {
     let sessionId = sessionStorage.getItem("analytics_session_id");
     if (!sessionId) {
@@ -144,7 +160,7 @@ class Analytics {
     return navigator.userAgent.substring(0, 255);
   }
 
-  // === Tracking ===
+  // === Tracking Methods ===
   async trackPageVisit() {
     if (this.disabled) return;
     try {
