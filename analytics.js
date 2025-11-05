@@ -3,10 +3,9 @@
 
 // WICHTIG: Diese Werte werden von Netlify zur BUILD-Zeit ersetzts
 // Setze in Netlify: Site settings -> Environment variables -> Build variables
-const SUPABASE_URL =
-  import.meta.env?.SUPABASE_URL || "SUPABASE_URL_PLACEHOLDER";
-const SUPABASE_ANON_KEY =
-  import.meta.env?.SUPABASE_ANON_KEY || "SUPABASE_ANON_KEY_PLACEHOLDER";
+// Platzhalter werden von Netlify ersetzt
+const SUPABASE_URL = 'SUPABASE_URL_PLACEHOLDER';
+const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY_PLACEHOLDER';
 
 class Analytics {
   constructor() {
