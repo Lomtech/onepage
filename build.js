@@ -183,12 +183,11 @@ if (finalCss) {
 console.log("\n📁 Kopiere weitere Dateien...");
 
 const filesToCopy = [
-  "viewer.html",
+  "app.js",
+  "index.html",
   "impressum.html",
   "datenschutz.html",
-  "cookies.html",
   "agb.html",
-  "success.html",
 ];
 
 let copiedFiles = 0;
