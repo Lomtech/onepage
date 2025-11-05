@@ -1,3 +1,5 @@
+// script.js - Main App Logic mit Analytics
+
 // Daten: später per fetch/JSON oder Backend ersetzbar
 const profile = {
   name: "Lom-Ali Imadaev",
@@ -47,6 +49,36 @@ nameEl.textContent = profile.name;
 bioEl.textContent = profile.bio;
 avatarEl.src = profile.avatar || "assets/avatar.jpg";
 
+// Helper: Get click stats (with fallback)
+function getClickStats(linkId) {
+  if (
+    window.analytics &&
+    typeof window.analytics.getLocalClickStats === "function"
+  ) {
+    return window.analytics.getLocalClickStats(linkId);
+  }
+  // Fallback: direkt aus localStorage lesen
+  const storageKey = "link_clicks_v1";
+  const clicks = JSON.parse(localStorage.getItem(storageKey) || "{}");
+  return clicks[linkId] || 0;
+}
+
+// Helper: Save click stats (with fallback)
+function saveClickStats(linkId) {
+  if (
+    window.analytics &&
+    typeof window.analytics.saveLocalClickStats === "function"
+  ) {
+    return window.analytics.saveLocalClickStats(linkId);
+  }
+  // Fallback: direkt in localStorage schreiben
+  const storageKey = "link_clicks_v1";
+  const clicks = JSON.parse(localStorage.getItem(storageKey) || "{}");
+  clicks[linkId] = (clicks[linkId] || 0) + 1;
+  localStorage.setItem(storageKey, JSON.stringify(clicks));
+  return clicks[linkId];
+}
+
 // Render Links
 function renderLinks() {
   linksContainer.innerHTML = "";
@@ -62,7 +94,7 @@ function renderLinks() {
     const icon = document.createElement("div");
     icon.className = "icon";
     icon.textContent = link.title[0] || "L";
-    icon.style.background = `${link.color || "rgba(14,165,164,0.12)"}`;
+    icon.style.background = link.color || "rgba(14,165,164,0.12)";
     icon.style.color = "#0b1220";
 
     const meta = document.createElement("div");
@@ -75,10 +107,10 @@ function renderLinks() {
     meta.appendChild(title);
     meta.appendChild(desc);
 
-    // Counter (wird später vom Dashboard gezeigt)
+    // Counter
     const counter = document.createElement("div");
     counter.className = "counter";
-    const localClicks = window.analytics.getLocalClickStats(link.id);
+    const localClicks = getClickStats(link.id);
     counter.textContent = `${localClicks} clicks`;
 
     a.appendChild(icon);
@@ -88,12 +120,15 @@ function renderLinks() {
     // Klick-Handler mit Analytics
     a.addEventListener("click", async (e) => {
       // Analytics tracken (non-blocking)
-      if (window.analytics) {
+      if (
+        window.analytics &&
+        typeof window.analytics.trackLinkClick === "function"
+      ) {
         window.analytics.trackLinkClick(link.id);
       }
 
-      // LocalStorage als Fallback
-      const newCount = window.analytics.saveLocalClickStats(link.id);
+      // LocalStorage Fallback
+      const newCount = saveClickStats(link.id);
       counter.textContent = `${newCount} clicks`;
 
       // Link öffnet normal in neuem Tab (default behavior)
@@ -103,13 +138,8 @@ function renderLinks() {
   });
 }
 
-// Warte bis Analytics bereit ist
-if (window.analytics) {
-  renderLinks();
-} else {
-  // Fallback falls Analytics nicht lädt
-  setTimeout(renderLinks, 100);
-}
+// Sofort rendern (mit Fallback-Funktionen)
+renderLinks();
 
 // Copy profile URL
 copyBtn.addEventListener("click", async () => {
