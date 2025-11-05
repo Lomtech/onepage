@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Analytics</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+      <div class="login-card">
+        <h1>📊 Dashboard Login</h1>
+        <p class="login-subtitle">Nur für autorisierte Nutzer</p>
+
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="deine@email.de"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <button type="submit" class="login-btn" id="loginBtn">
+            🔑 Magic Link senden
+          </button>
+
+          <p class="login-hint">
+            Ein Login-Link wird an deine E-Mail gesendet.<br />
+            Zugriff nur für: <strong>lom@limadaev.de</strong>
+          </p>
+        </form>
+
+        <div id="loginStatus" class="status-message"></div>
+
+        <a href="/" class="back-link">← Zurück zur Hauptseite</a>
+      </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="dashboard-container" style="display: none">
+      <header class="dashboard-header">
+        <div class="header-content">
+          <h1>📊 Analytics Dashboard</h1>
+          <div class="header-actions">
+            <span class="user-email" id="userEmail"></span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <!-- Summary Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👁️</div>
+            <div class="stat-content">
+              <h3>Seitenaufrufe</h3>
+              <p class="stat-value" id="totalVisits">-</p>
+              <span class="stat-label">Gesamt</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🖱️</div>
+            <div class="stat-content">
+              <h3>Link-Klicks</h3>
+              <p class="stat-value" id="totalClicks">-</p>
+              <span class="stat-label">Gesamt</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <h3>Unique Sessions</h3>
+              <p class="stat-value" id="uniqueSessions">-</p>
+              <span class="stat-label">Letzte 30 Tage</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div class="stat-content">
+              <h3>Heute</h3>
+              <p class="stat-value" id="todayVisits">-</p>
+              <span class="stat-label">Aufrufe</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Link Clicks Table -->
+        <div class="dashboard-section">
+          <h2>🔗 Link-Klicks nach ID</h2>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Link</th>
+                  <th>Klicks</th>
+                  <th>Letzte Aktivität</th>
+                </tr>
+              </thead>
+              <tbody id="linkClicksTable">
+                <tr>
+                  <td colspan="3" class="loading">Lade Daten...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Top Referrers -->
+        <div class="dashboard-section">
+          <h2>🌐 Top Referrer</h2>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Quelle</th>
+                  <th>Besuche</th>
+                </tr>
+              </thead>
+              <tbody id="referrersTable">
+                <tr>
+                  <td colspan="2" class="loading">Lade Daten...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="dashboard-section">
+          <h2>⏱️ Letzte Aktivitäten (24h)</h2>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Zeitpunkt</th>
+                  <th>Typ</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="recentActivityTable">
+                <tr>
+                  <td colspan="3" class="loading">Lade Daten...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <footer class="dashboard-footer">
+        <small>Daten werden alle 30 Sekunden aktualisiert</small>
+      </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
