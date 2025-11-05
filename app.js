@@ -142,7 +142,7 @@ class Analytics {
         session_id: this.sessionId,
         referrer: this.getReferrer(),
         user_agent: this.getUserAgent(),
-        visited_at: new Date().toISOString(),
+        created_at: new Date().toISOString(),
       });
       if (error) console.warn("Page visit tracking failed", error);
       else console.log("📈 Page visit logged");
