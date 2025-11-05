@@ -1,8 +1,8 @@
 // dashboard.js - Analytics Dashboard Logic
 
-// Platzhalter werden von Netlify ersetzt
-const SUPABASE_URL = 'SUPABASE_URL_PLACEHOLDER';
-const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY_PLACEHOLDER';
+// // Platzhalter werden von Netlify ersetzt
+// const SUPABASE_URL = 'SUPABASE_URL_PLACEHOLDER';
+// const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY_PLACEHOLDER';
 
 // Supabase Client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
