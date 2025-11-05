@@ -4,8 +4,11 @@
 // WICHTIG: Diese Werte werden von Netlify zur BUILD-Zeit ersetzts
 // Setze in Netlify: Site settings -> Environment variables -> Build variables
 // Platzhalter werden von Netlify ersetzt
-const SUPABASE_URL = 'SUPABASE_URL_PLACEHOLDER';
-const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY_PLACEHOLDER';
+// const SUPABASE_URL = 'SUPABASE_URL_PLACEHOLDER';
+// const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY_PLACEHOLDER';
+
+const SUPABASE_URL = 'https://ftohghotvfgkoeclmwfv.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0b2hnaG90dmZna29lY2xtd2Z2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3NzEwNDAsImV4cCI6MjA3NzM0NzA0MH0.UY_RP8g55jzb_9FCCqCO6FtwHWqG4LNGvWRTaA5nqhk';
 
 class Analytics {
   constructor() {
