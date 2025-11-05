@@ -10,20 +10,24 @@
         max-width: 800px;
         margin: 0 auto;
         padding: 40px 20px;
+        color: var(--text);
       }
       .legal-page h1 {
         font-size: 2rem;
         margin-bottom: 10px;
+        color: var(--text);
       }
       .legal-page h2 {
         font-size: 1.3rem;
         margin-top: 30px;
         margin-bottom: 10px;
+        color: var(--text);
       }
       .legal-page h3 {
         font-size: 1.1rem;
         margin-top: 20px;
         margin-bottom: 8px;
+        color: var(--text);
       }
       .legal-page p,
       .legal-page li {
@@ -45,12 +49,39 @@
         margin-bottom: 20px;
         color: var(--accent);
         text-decoration: none;
+        font-weight: 600;
+      }
+      .back-link:hover {
+        text-decoration: underline;
       }
       .highlight-box {
         background: rgba(14, 165, 164, 0.1);
         padding: 15px;
         border-radius: 8px;
         margin: 20px 0;
+        border-left: 4px solid var(--accent);
+      }
+      .warning-box {
+        background: rgba(255, 59, 48, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #ff3b30;
+      }
+      .revoke-btn {
+        background: #ff3b30;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+        font-size: 14px;
+        transition: background 0.2s;
+      }
+      .revoke-btn:hover {
+        background: #e0301f;
       }
     </style>
   </head>
@@ -65,8 +96,9 @@
         <p>
           <strong>Zusammenfassung:</strong> Diese Website erfasst grundlegende
           Besucherstatistiken (Seitenaufrufe, Link-Klicks) zu analytischen
-          Zwecken. Es werden keine persönlich identifizierbaren Daten ohne deine
-          Zustimmung erhoben.
+          Zwecken. Die Datenerfassung erfolgt nur mit deiner ausdrücklichen
+          Einwilligung über den Cookie-Banner. Es werden keine persönlich
+          identifizierbaren Daten wie IP-Adressen gespeichert.
         </p>
       </div>
 
@@ -85,15 +117,19 @@
         Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit
         deinen personenbezogenen Daten passiert, wenn du diese Website besuchst.
         Personenbezogene Daten sind alle Daten, mit denen du persönlich
-        identifiziert werden kannst.
+        identifiziert werden kannst. Ausführliche Informationen zum Thema
+        Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten
+        Datenschutzerklärung.
       </p>
 
       <h2>3. Datenerfassung auf dieser Website</h2>
 
       <h3>3.1 Server-Logs (Hosting bei Netlify)</h3>
       <p>
-        Der Hosting-Provider dieser Website (Netlify) erhebt und speichert
-        automatisch Informationen in sogenannten Server-Log-Dateien:
+        Der Hosting-Provider dieser Website (Netlify, Inc., 512 2nd Street,
+        Suite 200, San Francisco, CA 94107, USA) erhebt und speichert
+        automatisch Informationen in sogenannten Server-Log-Dateien, die dein
+        Browser automatisch an uns übermittelt:
       </p>
       <ul>
         <li>Browsertyp und Browserversion</li>
@@ -104,10 +140,18 @@
         <li>IP-Adresse (anonymisiert)</li>
       </ul>
       <p>
+        Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht
+        vorgenommen. Diese Daten werden nur zur Gewährleistung eines
+        störungsfreien Betriebs der Website und zur Verbesserung unseres
+        Angebotes verwendet.
+      </p>
+      <p>
         <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO
-        (berechtigtes Interesse an der technischen Bereitstellung und Sicherheit
-        der Website)<br />
+        (berechtigtes Interesse an der technischen Bereitstellung, Sicherheit
+        und Optimierung der Website)<br />
         <strong>Speicherdauer:</strong> 30 Tage<br />
+        <strong>Datenübermittlung in Drittland:</strong> USA (angemessenes
+        Datenschutzniveau durch EU-US Data Privacy Framework)<br />
         <strong>Mehr Infos:</strong>
         <a
           href="https://www.netlify.com/privacy/"
@@ -121,124 +165,261 @@
       <h3>3.2 Web Analytics (Supabase)</h3>
       <p>
         Diese Website nutzt eine selbst-gehostete Analytics-Lösung über
-        Supabase, um Besucherstatistiken zu erfassen:
+        Supabase, um Besucherstatistiken zu erfassen.
+        <strong
+          >Die Nutzung erfolgt nur mit deiner ausdrücklichen Einwilligung über
+          den Cookie-Banner beim ersten Besuch.</strong
+        >
       </p>
-      <p><strong>Erfasste Daten:</strong></p>
+
+      <p><strong>Erfasste Daten (nur mit Einwilligung):</strong></p>
       <ul>
-        <li>Seitenaufrufe (anonymisiert über Session-ID)</li>
-        <li>Geklickte Links</li>
-        <li>Referrer (woher du kamst)</li>
-        <li>Browser-Informationen (User-Agent)</li>
+        <li>
+          Seitenaufrufe (anonymisiert über zufällig generierte Session-ID)
+        </li>
+        <li>Geklickte Links (Link-ID, Zeitstempel)</li>
+        <li>Referrer (woher du kamst, nur Domain ohne URL-Parameter)</li>
+        <li>Browser-Informationen (User-Agent, max. 255 Zeichen)</li>
         <li>Zeitpunkt des Besuchs</li>
       </ul>
+
       <p><strong>KEINE Erfassung von:</strong></p>
       <ul>
-        <li>IP-Adressen</li>
-        <li>Cookies für Tracking-Zwecke</li>
-        <li>Persönlich identifizierbaren Informationen</li>
-        <li>Daten über mehrere Websites hinweg</li>
+        <li>IP-Adressen (werden nicht gespeichert)</li>
+        <li>Persönlich identifizierbaren Informationen (Name, E-Mail, etc.)</li>
+        <li>Daten über mehrere Websites hinweg (kein Cross-Site-Tracking)</li>
+        <li>Standortdaten oder Gerätekennungen</li>
       </ul>
+
       <p>
         <strong>Zweck:</strong> Verbesserung der Website und Verständnis, welche
-        Inhalte für Besucher interessant sind<br />
-        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO
-        (berechtigtes Interesse an der Optimierung der Website)<br />
+        Inhalte für Besucher interessant sind. Die Analytics helfen uns zu
+        verstehen, wie Besucher mit unserer Website interagieren.<br />
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO
+        (Einwilligung über Cookie-Banner)<br />
         <strong>Speicherdauer:</strong> 90 Tage, danach automatische Löschung<br />
         <strong>Datenverarbeitung:</strong> EU (Supabase-Server in Frankfurt,
-        Deutschland)
+        Deutschland)<br />
+        <strong>Anbieter:</strong> Supabase, Inc., 970 Toa Payoh North, #07-04,
+        Singapore 318992
       </p>
 
-      <h3>3.3 Local Storage</h3>
+      <div class="warning-box">
+        <p><strong>⚠️ Widerruf deiner Einwilligung:</strong></p>
+        <p>
+          Du kannst deine Einwilligung zur Nutzung von Analytics jederzeit mit
+          Wirkung für die Zukunft widerrufen, indem du auf den Button unten
+          klickst. Der Widerruf wirkt sich nicht auf die Rechtmäßigkeit der
+          aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung aus.
+        </p>
+        <button
+          class="revoke-btn"
+          onclick="localStorage.removeItem('analytics_consent'); localStorage.removeItem('linkClicks'); sessionStorage.clear(); alert('✅ Einwilligung widerrufen und alle Analytics-Daten gelöscht.\n\nDie Seite wird jetzt neu geladen.'); window.location.href='/';"
+        >
+          🗑️ Analytics-Einwilligung widerrufen
+        </button>
+      </div>
+
+      <h3>3.3 Local Storage und Session Storage</h3>
       <p>
-        Diese Website speichert eine Session-ID und Klick-Zähler in deinem
-        Browser (Local Storage). Diese Daten:
+        Diese Website speichert Daten im Browser-Speicher (Local Storage und
+        Session Storage) deines Geräts:
       </p>
+
+      <p><strong>Technisch notwendige Daten (ohne Einwilligung):</strong></p>
       <ul>
-        <li>Bleiben auf deinem Gerät gespeichert</li>
-        <li>Werden nicht an Server übermittelt</li>
         <li>
-          Können jederzeit von dir gelöscht werden (Browser-Einstellungen →
-          Browserdaten löschen)
+          <strong>analytics_consent:</strong> Speichert deine Wahl im
+          Cookie-Banner (akzeptiert/abgelehnt), um den Banner nicht bei jedem
+          Besuch erneut anzuzeigen
         </li>
-        <li>Dienen nur der lokalen Darstellung von Klick-Statistiken</li>
       </ul>
       <p>
-        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (technisch
-        notwendig für die Funktion der Website)
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. c DSGVO (rechtliche
+        Verpflichtung zur Dokumentation der Einwilligung gemäß Art. 7 Abs. 1
+        DSGVO)
       </p>
 
-      <h2>4. Keine Cookies</h2>
+      <p><strong>Daten mit Einwilligung (nur bei Zustimmung):</strong></p>
+      <ul>
+        <li>
+          <strong>analytics_session_id:</strong> Eindeutige, zufällig generierte
+          Session-ID (UUID v4 Format) zur Zuordnung von Seitenaufrufen innerhalb
+          einer Browser-Sitzung
+        </li>
+        <li>
+          <strong>linkClicks:</strong> Lokale Zähler für geklickte Links, dienen
+          der Anzeige von Klick-Statistiken
+        </li>
+      </ul>
       <p>
-        Diese Website setzt <strong>keine Cookies</strong> ein. Alle Daten
-        werden entweder im Local Storage deines Browsers (siehe 3.3) oder auf
-        unseren Servern gespeichert.
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO
+        (Einwilligung über Cookie-Banner)<br />
+        <strong>Speicherdauer:</strong> Bis zur manuellen Löschung durch dich
+        oder Widerruf der Einwilligung
+      </p>
+
+      <p>
+        <strong>Löschung:</strong> Diese Daten können jederzeit von dir gelöscht
+        werden über:
+      </p>
+      <ul>
+        <li>Browser-Einstellungen → Browserdaten löschen → Local Storage</li>
+        <li>Den Widerrufs-Button oben in Abschnitt 3.2</li>
+      </ul>
+
+      <h2>4. Cookies und ähnliche Technologien</h2>
+      <p>
+        Diese Website setzt <strong>keine traditionellen Cookies</strong> ein.
+        Stattdessen nutzen wir Local Storage und Session Storage (siehe 3.3),
+        die rechtlich nach § 25 TTDSG
+        (Telekommunikation-Telemedien-Datenschutz-Gesetz) ähnlich wie Cookies
+        behandelt werden.
+      </p>
+      <p>
+        <strong>Cookie-Banner:</strong> Beim ersten Besuch wirst du über einen
+        Cookie-Banner gefragt, ob du der Nutzung von Analytics und den damit
+        verbundenen Speichervorgängen zustimmst. Ohne deine Einwilligung werden
+        nur technisch notwendige Daten gespeichert (analytics_consent zur
+        Dokumentation deiner Wahl).
       </p>
 
       <h2>5. Externe Links</h2>
       <p>
-        Diese Website enthält Links zu externen Websites (Instagram, X/Twitter,
-        TikTok, etc.). Wenn du auf einen dieser Links klickst, werden die
-        Datenschutzrichtlinien der jeweiligen Plattform wirksam. Wir haben
-        keinen Einfluss auf deren Datenverarbeitung.
+        Diese Website enthält Links zu externen Websites Dritter (Instagram,
+        X/Twitter, TikTok, BJJ Open Mats). Wenn du auf einen dieser Links
+        klickst, wirst du zu externen Websites weitergeleitet, auf deren Inhalte
+        und Datenverarbeitung wir keinen Einfluss haben.
       </p>
-
-      <h2>6. Deine Rechte</h2>
-      <p>Du hast folgende Rechte bezüglich deiner personenbezogenen Daten:</p>
+      <p>
+        Für die Datenverarbeitung auf diesen externen Websites sind
+        ausschließlich deren Betreiber verantwortlich. Wir empfehlen dir, die
+        Datenschutzerklärungen der jeweiligen Anbieter zu lesen:
+      </p>
       <ul>
         <li>
-          <strong>Auskunft:</strong> Du kannst Auskunft über die von uns
-          gespeicherten Daten verlangen
+          <a
+            href="https://help.instagram.com/519522125107875"
+            target="_blank"
+            rel="noopener"
+            >Instagram Datenschutz</a
+          >
         </li>
         <li>
-          <strong>Berichtigung:</strong> Falsche Daten werden auf Wunsch
-          korrigiert
+          <a href="https://twitter.com/privacy" target="_blank" rel="noopener"
+            >X/Twitter Datenschutz</a
+          >
         </li>
         <li>
-          <strong>Löschung:</strong> Du kannst die Löschung deiner Daten
-          verlangen
+          <a
+            href="https://www.tiktok.com/legal/privacy-policy"
+            target="_blank"
+            rel="noopener"
+            >TikTok Datenschutz</a
+          >
+        </li>
+      </ul>
+
+      <h2>6. Deine Rechte</h2>
+      <p>
+        Du hast nach der Datenschutz-Grundverordnung (DSGVO) folgende Rechte
+        bezüglich deiner personenbezogenen Daten:
+      </p>
+      <ul>
+        <li>
+          <strong>Auskunft (Art. 15 DSGVO):</strong> Du kannst Auskunft über die
+          von uns gespeicherten Daten verlangen
         </li>
         <li>
-          <strong>Einschränkung:</strong> Du kannst die Verarbeitung deiner
-          Daten einschränken lassen
+          <strong>Berichtigung (Art. 16 DSGVO):</strong> Unrichtige Daten werden
+          auf Wunsch korrigiert
         </li>
         <li>
-          <strong>Widerspruch:</strong> Du kannst der Verarbeitung widersprechen
+          <strong>Löschung (Art. 17 DSGVO):</strong> Du kannst die Löschung
+          deiner Daten verlangen, soweit keine gesetzlichen
+          Aufbewahrungspflichten entgegenstehen
         </li>
         <li>
-          <strong>Datenübertragbarkeit:</strong> Du kannst deine Daten in einem
-          maschinenlesbaren Format erhalten
+          <strong>Einschränkung (Art. 18 DSGVO):</strong> Du kannst die
+          Verarbeitung deiner Daten einschränken lassen
         </li>
         <li>
-          <strong>Beschwerde:</strong> Du kannst dich bei einer
-          Datenschutz-Aufsichtsbehörde beschweren
+          <strong>Widerspruch (Art. 21 DSGVO):</strong> Du kannst der
+          Verarbeitung widersprechen
+        </li>
+        <li>
+          <strong>Datenübertragbarkeit (Art. 20 DSGVO):</strong> Du kannst deine
+          Daten in einem strukturierten, gängigen und maschinenlesbaren Format
+          erhalten
+        </li>
+        <li>
+          <strong>Widerruf der Einwilligung (Art. 7 Abs. 3 DSGVO):</strong> Du
+          kannst erteilte Einwilligungen jederzeit mit Wirkung für die Zukunft
+          widerrufen (z.B. über den Button in Abschnitt 3.2)
+        </li>
+        <li>
+          <strong>Beschwerde (Art. 77 DSGVO):</strong> Du hast das Recht, dich
+          bei einer Datenschutz-Aufsichtsbehörde zu beschweren, insbesondere in
+          dem Mitgliedstaat deines Aufenthaltsorts, deines Arbeitsplatzes oder
+          des Orts des mutmaßlichen Verstoßes
         </li>
       </ul>
       <p>
-        Zur Ausübung deiner Rechte kontaktiere uns bitte unter:
-        [deine-email@example.com]
+        Zur Ausübung deiner Rechte kontaktiere uns bitte unter:<br />
+        <strong>E-Mail:</strong> lomaliimadaev@gmail.com
+      </p>
+      <p>
+        <strong>Zuständige Aufsichtsbehörde:</strong><br />
+        Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)<br />
+        Promenade 18, 91522 Ansbach<br />
+        <a href="https://www.lda.bayern.de" target="_blank" rel="noopener"
+          >www.lda.bayern.de</a
+        >
       </p>
 
       <h2>7. Datensicherheit</h2>
       <p>
-        Wir verwenden HTTPS-Verschlüsselung für die sichere Übertragung von
-        Daten. Alle Analytics-Daten werden auf EU-Servern (Deutschland)
-        gespeichert und unterliegen strengen Zugriffskontrollen.
+        Wir verwenden innerhalb des Website-Besuchs das verbreitete
+        SSL-Verfahren (Secure Socket Layer) in Verbindung mit der jeweils
+        höchsten Verschlüsselungsstufe, die von deinem Browser unterstützt wird
+        (erkennbar am "https://" in der URL und dem Schloss-Symbol in der
+        Browserzeile).
+      </p>
+      <p>
+        Alle Analytics-Daten werden ausschließlich auf Servern innerhalb der
+        Europäischen Union (Frankfurt, Deutschland) gespeichert und unterliegen
+        strengen Zugriffskontrollen. Die Datenübertragung zwischen deinem
+        Browser und den Supabase-Servern erfolgt verschlüsselt über HTTPS.
       </p>
 
       <h2>8. Änderungen dieser Datenschutzerklärung</h2>
       <p>
         Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an
-        geänderte Rechtslage oder bei Änderungen der Website anzupassen. Die
-        jeweils aktuelle Fassung findest du stets auf dieser Seite.
+        geänderte Rechtslagen oder bei Änderungen des Dienstes sowie der
+        Datenverarbeitung anzupassen. Dies gilt jedoch nur im Hinblick auf
+        Erklärungen zur Datenverarbeitung. Sofern Einwilligungen des Nutzers
+        erforderlich sind oder Bestandteile der Datenschutzerklärung Regelungen
+        des Vertragsverhältnisses mit Nutzern enthalten, erfolgen die Änderungen
+        nur mit Zustimmung der Nutzer.
+      </p>
+      <p>
+        Die Nutzer werden gebeten, sich regelmäßig über den Inhalt der
+        Datenschutzerklärung zu informieren. Die jeweils aktuelle Fassung
+        findest du stets auf dieser Seite.
       </p>
 
       <h2>9. Kontakt zum Datenschutz</h2>
       <p>
-        Bei Fragen zum Datenschutz kannst du dich jederzeit an uns wenden:<br />
-        E-Mail: [deine-email@example.com]
+        Bei Fragen zum Datenschutz oder zur Ausübung deiner Rechte kannst du
+        dich jederzeit an uns wenden:<br /><br />
+        <strong>Lom-Ali Imadaev</strong><br />
+        Kreuzstraße 1<br />
+        82276 Adelshofen<br />
+        Deutschland<br />
+        E-Mail: lomaliimadaev@gmail.com
       </p>
 
-      <footer class="footer" style="margin-top: 60px">
+      <footer class="footer" style="margin-top: 60px; text-align: center">
         <small>Stand: November 2025</small>
       </footer>
     </div>

@@ -12,6 +12,8 @@ if (!fs.existsSync(buildDir)) {
   console.log("📁 dist/ Ordner erstellt");
 }
 
+console.log("\n🔨 Build-Prozess gestartet...\n");
+
 // === Kopiere index.html ===
 fs.copyFileSync("index.html", path.join(buildDir, "index.html"));
 console.log("   ✓ index.html");
@@ -19,6 +21,14 @@ console.log("   ✓ index.html");
 // === Kopiere CSS ===
 fs.copyFileSync("styles.css", path.join(buildDir, "styles.css"));
 console.log("   ✓ styles.css");
+
+// === Kopiere Cookie-Banner CSS ===
+if (fs.existsSync("cookie-banner.css")) {
+  fs.copyFileSync("cookie-banner.css", path.join(buildDir, "cookie-banner.css"));
+  console.log("   ✓ cookie-banner.css");
+} else {
+  console.warn("   ⚠️ cookie-banner.css nicht gefunden");
+}
 
 // === Kopiere Legal Pages ===
 ["datenschutz.html", "impressum.html"].forEach((file) => {
@@ -57,13 +67,35 @@ const resultJs = js
 fs.writeFileSync(path.join(buildDir, "app.js"), resultJs);
 console.log("   ✓ app.js");
 
+// === Kopiere cookie-consent.js ===
+if (fs.existsSync("cookie-consent.js")) {
+  fs.copyFileSync("cookie-consent.js", path.join(buildDir, "cookie-consent.js"));
+  console.log("   ✓ cookie-consent.js");
+} else {
+  console.warn("   ⚠️ cookie-consent.js nicht gefunden");
+}
+
 // === Abschlussmeldung ===
-console.log("\n✅ Build completed");
+console.log("\n✅ Build completed successfully!\n");
+console.log("📊 Umgebungsvariablen:");
 console.log(
-  "SUPABASE_URL:",
+  "   SUPABASE_URL:",
   process.env.SUPABASE_URL ? "✓ gesetzt" : "✗ fehlt"
 );
 console.log(
-  "SUPABASE_ANON_KEY:",
+  "   SUPABASE_ANON_KEY:",
   process.env.SUPABASE_ANON_KEY ? "✓ gesetzt" : "✗ fehlt"
 );
+
+console.log("\n📦 Build-Inhalt:");
+console.log("   dist/");
+console.log("   ├── index.html");
+console.log("   ├── styles.css");
+console.log("   ├── cookie-banner.css");
+console.log("   ├── app.js");
+console.log("   ├── cookie-consent.js");
+console.log("   ├── datenschutz.html");
+console.log("   ├── impressum.html");
+console.log("   └── assets/");
+console.log("       └── avatar.jpg");
+console.log("");
