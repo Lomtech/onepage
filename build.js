@@ -11,8 +11,22 @@ fs.copyFileSync('index.html', 'dist/index.html');
 // Kopiere CSS
 fs.copyFileSync('styles.css', 'dist/styles.css');
 
-// Avatar
-fs.copyFileSync('avatar.jpg', 'dist/avatar.jpg');
+// Avatar Copy assets directory if exists
+const assetsDir = path.join(__dirname, 'assets');
+const buildAssetsDir = path.join(buildDir, 'assets');
+if (fs.existsSync(assetsDir)) {
+  if (!fs.existsSync(buildAssetsDir)) {
+    fs.mkdirSync(buildAssetsDir, { recursive: true });
+  }
+  const assetFiles = fs.readdirSync(assetsDir);
+  assetFiles.forEach(file => {
+    fs.copyFileSync(
+      path.join(assetsDir, file),
+      path.join(buildAssetsDir, file)
+    );
+    console.log(`   ✓ assets/${file}`);
+  });
+}
 
 // Kopiere Legal Pages
 fs.copyFileSync('datenschutz.html', 'dist/datenschutz.html');
