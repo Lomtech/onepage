@@ -1,7 +1,3 @@
-// app.js - Simple Link Tracker (localStorage only)
-const SUPABASE_URL = "SUPABASE_URL_PLACEHOLDER";
-const SUPABASE_ANON_KEY = "SUPABASE_ANON_KEY_PLACEHOLDER";
-
 // Initialize counters
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 App initialized");

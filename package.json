@@ -9,5 +9,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.79.0"
   }
 }
