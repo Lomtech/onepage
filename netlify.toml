@@ -1,11 +1,8 @@
 # netlify.toml - Netlify Configuration
 
 [build]
-  # Build command
-  command = "node build.js"
-  
-  # Publish directory
-  publish = "build"
+  # Kein Build-Script - direkt deployen
+  publish = "."
 
 # Redirect rules
 [[redirects]]
