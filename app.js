@@ -5,6 +5,16 @@ const SUPABASE_ANON_KEY = "SUPABASE_KEY_PLACEHOLDER";
 // === INITIALIZATION ===
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 App initialized");
+
+  // Analytics nur laden wenn Einwilligung vorliegt
+  const consent = localStorage.getItem("analytics_consent");
+  if (consent === "accepted") {
+    window.analytics = new Analytics();
+    loadClickCounts(); // Zähler laden
+  } else {
+    console.log("⏸️ Analytics wartet auf Einwilligung");
+    window.analytics = { disabled: true }; // Dummy-Objekt
+  }
   window.analytics = new Analytics();
 
   // Initiale Zähler laden (Fallback)
