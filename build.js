@@ -22,12 +22,6 @@ console.log("✅ Neuer dist/ Ordner erstellt");
 // ============================================
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
-
-// Price IDs - nutze die alten Namen aus deiner Config
-const STRIPE_PRICE_BASIC = process.env.STRIPE_PRICE_BASIC;
-const STRIPE_PRICE_PREMIUM = process.env.STRIPE_PRICE_PREMIUM;
-const STRIPE_PRICE_ELITE = process.env.STRIPE_PRICE_ELITE;
 
 // Validierung
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
@@ -87,8 +81,8 @@ if (!fs.existsSync(path.join(__dirname, appJsSource))) {
 let appJs = fs.readFileSync(path.join(__dirname, appJsSource), "utf8");
 
 // Ersetze Credentials
-appJs = appJs.replace(/DEIN_SUPABASE_URL/g, SUPABASE_URL);
-appJs = appJs.replace(/DEIN_SUPABASE_ANON_KEY/g, SUPABASE_ANON_KEY);
+appJs = appJs.replace(/SUPABASE_URL_PLACEHOLDER/g, SUPABASE_URL);
+appJs = appJs.replace(/SUPABASE_ANON_KEY_PLACEHOLDER/g, SUPABASE_ANON_KEY);
 
 
 
@@ -114,7 +108,7 @@ if (!fs.existsSync(path.join(__dirname, indexSource))) {
 let indexHtml = fs.readFileSync(path.join(__dirname, indexSource), "utf8");
 
 // Ersetze JavaScript-Referenzen
-indexHtml = indexHtml.replace(/app-multitenant\.js/g, "app.js");
+indexHtml = indexHtml.replace(/app\.js/g, "app.js");
 indexHtml = indexHtml.replace(/src="app\.js"/g, 'src="app.js"'); // Normalisierung
 
 // Cache-Busting
@@ -162,15 +156,7 @@ if (fs.existsSync(path.join(__dirname, "styles.css"))) {
   console.log("   ✅ styles.css geladen");
 }
 
-// Addon-CSS (falls vorhanden)
-if (fs.existsSync(path.join(__dirname, "styles-multitenant-addon.css"))) {
-  const addonCss = fs.readFileSync(
-    path.join(__dirname, "styles-multitenant-addon.css"),
-    "utf8"
-  );
-  finalCss += "\n\n/* === MULTI-TENANT ADDON === */\n\n" + addonCss;
-  console.log("   ✅ styles-multitenant-addon.css hinzugefügt");
-}
+
 
 if (finalCss) {
   fs.writeFileSync(path.join(distDir, "styles.css"), finalCss);
@@ -259,12 +245,7 @@ console.log("   ✅ _headers (MIME Types Fix!)");
 
 console.log("\n🔑 Konfiguration:");
 console.log("   ✅ Supabase URL & Key gesetzt");
-console.log(
-  "   " +
-    (STRIPE_PUBLISHABLE_KEY ? "✅" : "⚠️") +
-    " Stripe " +
-    (STRIPE_PUBLISHABLE_KEY ? "aktiviert" : "Demo-Modus")
-);
+
 
 console.log("\n🚀 Bereit für Deployment!!");
 console.log("═════════════════════════════════════════════\n");
