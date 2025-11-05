@@ -1,26 +1,21 @@
-# netlify.toml - Netlify Configuration
+# netlify.toml - Einfache Konfiguration
 
 [build]
-  # Kein Build-Script - direkt deployen
   publish = "."
 
-# Redirect rules
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = false
 
-# Headers for security
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
-# Cache static assets
 [[headers]]
   for = "/assets/*"
   [headers.values]

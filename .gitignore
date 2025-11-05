@@ -1,14 +1,5 @@
-# Build Directory
-build/
-
-# Environment Variables (local testing only)
-.env
-.env.local
-
-# Node modules (falls du später npm brauchst)
-node_modules/
-
-# OS Files
+cat > /home/claude/.gitignore << 'EOF'
+# OS
 .DS_Store
 Thumbs.db
 
@@ -20,7 +11,12 @@ Thumbs.db
 
 # Logs
 *.log
-npm-debug.log*
+
+# Environment
+.env
+.env.local
 
 # Netlify
 .netlify/
+EOF
+echo "✅ .gitignore created"

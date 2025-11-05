@@ -1,31 +1,67 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Lom-Ali Imadaev</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="card">
-      <header class="profile">
-        <img class="avatar" src="assets/avatar.jpg" alt="Profilbild" />
-        <h1 id="name"></h1>
-        <p id="bio"></p>
-        <div class="controls">
-          <button id="copyUrlBtn" class="btn small">Link kopieren</button>
-          <!-- <button id="themeToggle" class="btn small">Theme</button> -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lom-Ali Imadaev</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card">
+    <header class="profile">
+      <img class="avatar" src="assets/avatar.jpg" alt="Lom-Ali Imadaev">
+      <h1>Lom-Ali Imadaev</h1>
+      <p class="bio">Combat Grappler · Senior SAP-Consultant · ABAP-Entwickler · Webdev · Kaffee-Liebhaber</p>
+      <button id="copyBtn" class="btn">📋 Link kopieren</button>
+    </header>
+
+    <section class="links">
+      <a href="https://bjjom.de/" class="link" data-id="bjj-open-mats" target="_blank" rel="noopener">
+        <div class="icon" style="background: #4268e5;">B</div>
+        <div class="meta">
+          <h3>BJJ Open Mats</h3>
+          <p>BJJ-Community</p>
         </div>
-      </header>
+        <span class="counter">0</span>
+      </a>
 
-      <section id="links" class="links"></section>
+      <a href="https://x.com/LImadaev97219" class="link" data-id="x-twitter" target="_blank" rel="noopener">
+        <div class="icon" style="background: #dadada; color: #000;">X</div>
+        <div class="meta">
+          <h3>X / Twitter</h3>
+          <p>@LImadaev97219</p>
+        </div>
+        <span class="counter">0</span>
+      </a>
 
-      <footer class="footer">
-        <small>Never Pull Guard</small>
+      <a href="https://www.tiktok.com/@lom1923?lang=de-DE" class="link" data-id="tiktok" target="_blank" rel="noopener">
+        <div class="icon" style="background: #28e028;">T</div>
+        <div class="meta">
+          <h3>TikTok</h3>
+          <p>Gedanken zu Kampfsport</p>
+        </div>
+        <span class="counter">0</span>
+      </a>
+
+      <a href="https://www.instagram.com/lomcombatgrappler/" class="link" data-id="instagram" target="_blank" rel="noopener">
+        <div class="icon" style="background: #e57adc;">I</div>
+        <div class="meta">
+          <h3>Instagram</h3>
+          <p>Mein IG-Profil</p>
+        </div>
+        <span class="counter">0</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <small>Never Pull Guard</small>
+      <div class="legal-links">
         <a href="impressum.html">Impressum</a>
         <a href="datenschutz.html">Datenschutz</a>
-      </footer>
-    </main>
-    <script src="script.js"></script>
-  </body>
+      </div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
 </html>
