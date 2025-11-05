@@ -73,12 +73,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function handleLogin(e) {
   e.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
   const loginBtn = document.getElementById("loginBtn");
   const statusDiv = document.getElementById("loginStatus");
 
+  // Validiere Email-Format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    showStatus("❌ Bitte gib eine gültige E-Mail-Adresse ein.", "error");
+    return;
+  }
+
   // Prüfe ob Email erlaubt ist
-  if (email !== ALLOWED_EMAIL) {
+  const allowedEmail = ALLOWED_EMAIL.toLowerCase();
+  if (email !== allowedEmail) {
     showStatus(
       `❌ Zugriff verweigert. Nur ${ALLOWED_EMAIL} ist autorisiert.`,
       "error"
@@ -91,23 +99,41 @@ async function handleLogin(e) {
   loginBtn.textContent = "⏳ Sende Magic Link...";
 
   try {
-    const { error } = await supabase.auth.signInWithOtp({
+    const { data, error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
-        emailRedirectTo: window.location.href,
+        emailRedirectTo: window.location.origin + "/dashboard.html",
+        shouldCreateUser: true, // Wichtig: User automatisch anlegen
       },
     });
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase Auth Error:", error);
+      throw new Error(error.message);
+    }
 
+    console.log("Magic Link sent:", data);
     showStatus(
-      `✅ Magic Link wurde an ${email} gesendet. Prüfe dein Postfach!`,
+      `✅ Magic Link wurde an ${email} gesendet!\n\nPrüfe dein Postfach (auch Spam-Ordner).`,
       "success"
     );
     document.getElementById("email").value = "";
   } catch (error) {
     console.error("Login error:", error);
-    showStatus(`❌ Fehler: ${error.message}`, "error");
+
+    // Spezifische Fehlermeldungen
+    let errorMessage = error.message;
+
+    if (errorMessage.includes("Database error")) {
+      errorMessage = "Datenbank-Fehler. Bitte prüfe die Supabase RLS Policies.";
+    } else if (errorMessage.includes("Email not confirmed")) {
+      errorMessage =
+        "E-Mail nicht bestätigt. Prüfe Email Auth Settings in Supabase.";
+    } else if (errorMessage.includes("Invalid email")) {
+      errorMessage = "Ungültige E-Mail-Adresse.";
+    }
+
+    showStatus(`❌ Fehler: ${errorMessage}`, "error");
   } finally {
     loginBtn.disabled = false;
     loginBtn.textContent = "🔑 Magic Link senden";
@@ -180,9 +206,8 @@ async function loadDashboardData() {
 
     if (sessionsError) throw sessionsError;
 
-    const uniqueSessions = new Set(
-      sessionsData.map((row) => row.session_id)
-    ).size;
+    const uniqueSessions = new Set(sessionsData.map((row) => row.session_id))
+      .size;
     document.getElementById("uniqueSessions").textContent =
       uniqueSessions.toLocaleString();
 
@@ -246,7 +271,9 @@ async function loadLinkClicks() {
     });
 
     // Sortiere nach Klickzahl
-    const sorted = Object.entries(linkStats).sort((a, b) => b[1].count - a[1].count);
+    const sorted = Object.entries(linkStats).sort(
+      (a, b) => b[1].count - a[1].count
+    );
 
     if (sorted.length === 0) {
       tbody.innerHTML =
@@ -290,9 +317,7 @@ async function loadTopReferrers() {
     });
 
     // Sortiere nach Häufigkeit
-    const sorted = Object.entries(referrerCounts).sort(
-      (a, b) => b[1] - a[1]
-    );
+    const sorted = Object.entries(referrerCounts).sort((a, b) => b[1] - a[1]);
 
     if (sorted.length === 0) {
       tbody.innerHTML =
