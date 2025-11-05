@@ -71,7 +71,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Check Authentication
+// Check Authenticationn
 async function checkAuth() {
   const { data: { session } } = await supabase.auth.getSession();
   
