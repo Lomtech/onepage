@@ -34,19 +34,23 @@
       data-allow-localhost="true"
     ></script>
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="card">
       <header class="profile">
-        <img class="avatar" src="assets/avatar.jpg" alt="Lom-Ali Imadaev" />
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+          <img class="avatar" src="assets/avatar.jpg" alt="Lom-Ali Imadaev" />
+        </div>
         <h1>Lom-Ali Imadaev</h1>
         <p class="bio">
           Grappler · Senior SAP Treasury Consultant · ABAP-Entwickler
         </p>
         <button id="copyBtn" class="btn">📋 Link kopieren</button>
       </header>
+
+      <div class="divider"></div>
 
       <section class="links">
         <a
@@ -56,12 +60,18 @@
           target="_blank"
           rel="noopener"
         >
-          <div class="icon" style="background: #4268e5">B</div>
+          <div
+            class="icon"
+            style="background: linear-gradient(135deg, #4268e5, #6c8ff7)"
+          >
+            B
+          </div>
           <div class="meta">
             <h3>BJJ Archetypes</h3>
-            <p>BJJ-Archetypes</p>
+            <p>Finde deinen Kampfstil</p>
           </div>
-          <span class="counter">0</span>
+          <span class="counter" data-id="bjj-kampfstil-archetype">0</span>
+          <span class="arrow">→</span>
         </a>
 
         <a
@@ -71,13 +81,20 @@
           target="_blank"
           rel="noopener"
         >
-          <div class="icon" style="background: #e57adc">I</div>
+          <div
+            class="icon"
+            style="background: linear-gradient(135deg, #e57adc, #f0a0ec)"
+          >
+            I
+          </div>
           <div class="meta">
             <h3>Instagram</h3>
             <p>Mein IG-Profil</p>
           </div>
-          <span class="counter">0</span>
+          <span class="counter" data-id="instagram">0</span>
+          <span class="arrow">→</span>
         </a>
+
         <a
           href="https://malerinffb.de"
           class="link"
@@ -85,11 +102,21 @@
           target="_blank"
           rel="noopener"
         >
-          <div class="icon" style="background: #dadada; color: #000">👨‍🎨</div>
+          <div
+            class="icon"
+            style="
+              background: linear-gradient(135deg, #e8e0d5, #d4cbc0);
+              color: #555;
+            "
+          >
+            🎨
+          </div>
           <div class="meta">
             <h3>Maler in FFB</h3>
+            <p>Malerbetrieb Fürstenfeldbruck</p>
           </div>
-          <span class="counter">0</span>
+          <span class="counter" data-id="malerinffb">0</span>
+          <span class="arrow">→</span>
         </a>
 
         <a
@@ -99,17 +126,25 @@
           target="_blank"
           rel="noopener"
         >
-          <div class="icon" style="background: #28e028">T</div>
+          <div
+            class="icon"
+            style="background: linear-gradient(135deg, #28e028, #1ab81a)"
+          >
+            T
+          </div>
           <div class="meta">
             <h3>TikTok</h3>
             <p>Gedanken zu Kampfsport</p>
           </div>
-          <span class="counter">0</span>
+          <span class="counter" data-id="tiktok">0</span>
+          <span class="arrow">→</span>
         </a>
       </section>
 
+      <div class="divider"></div>
+
       <footer class="footer">
-        <small>Never Pull Guard</small>
+        <span class="motto">Never Pull Guard</span>
         <div class="legal-links">
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
