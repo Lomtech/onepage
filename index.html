@@ -75,25 +75,27 @@
       width: var(--card-w);
       height: var(--card-h);
       position: relative;
-      transform-style: preserve-3d;
-      transition: transform 1100ms cubic-bezier(.2, .7, .1, 1);
       cursor: pointer;
-      will-change: transform;
     }
-    .card.is-flipped { transform: rotateY(180deg); }
 
     .face {
       position: absolute;
       inset: 0;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       background: linear-gradient(180deg, #fbf7ec 0%, #f1ecdf 100%);
       border: 1px solid var(--line);
       border-radius: 2px;
       box-shadow: var(--shadow);
       padding: clamp(22px, 4vw, 40px);
       display: grid;
+      transition: opacity 700ms cubic-bezier(.2, .7, .1, 1),
+                  transform 700ms cubic-bezier(.2, .7, .1, 1);
     }
+
+    /* Crossfade flip: front oben, back darunter. Pointer-events folgen der Sichtbarkeit. */
+    .front { opacity: 1; pointer-events: auto; transform: scale(1); }
+    .back  { opacity: 0; pointer-events: none; transform: scale(.96); }
+    .card.is-flipped .front { opacity: 0; pointer-events: none; transform: scale(.96); }
+    .card.is-flipped .back  { opacity: 1; pointer-events: auto; transform: scale(1); }
 
     .face::before {
       content: "";
@@ -191,7 +193,7 @@
     .card.is-flipped .hint { opacity: 0; }
 
     /* ============ BACK ============ */
-    .back { transform: rotateY(180deg); grid-template-rows: auto 1fr auto; }
+    .back { grid-template-rows: auto 1fr auto; }
 
     .links {
       align-self: center;
@@ -285,11 +287,10 @@
       z-index: 0;
     }
 
-    .card { opacity: 0; transform: rotateY(0) translateY(8px); animation: enter 1100ms cubic-bezier(.2, .7, .1, 1) 120ms forwards; }
-    @keyframes enter {
-      to { opacity: 1; transform: rotateY(0) translateY(0); }
+    .card { opacity: 0; animation: fade-in 1100ms cubic-bezier(.2, .7, .1, 1) 120ms forwards; }
+    @keyframes fade-in {
+      to { opacity: 1; }
     }
-    .card.is-flipped { animation: none; opacity: 1; }
 
     @media (prefers-reduced-motion: reduce) {
       .card, .links a, .links a .arrow, .initials {
