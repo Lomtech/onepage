@@ -35,7 +35,7 @@
         0 12px 28px -14px rgba(60, 52, 30, .22),
         0 30px 60px -30px rgba(60, 52, 30, .18);
       --card-w: min(560px, 92vw);
-      --card-h: min(340px, 56vw);
+      --card-h: clamp(240px, 58vw, 340px);
     }
 
     * { box-sizing: border-box; }
@@ -201,7 +201,7 @@
       width: 100%;
       max-width: 360px;
       display: grid;
-      gap: clamp(8px, 1.4vw, 14px);
+      gap: clamp(4px, 1.2vw, 14px);
       padding: 0;
       margin: 0;
       list-style: none;
@@ -211,13 +211,13 @@
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: baseline;
-      padding: 9px 2px;
+      padding: clamp(6px, 1.4vw, 9px) 2px;
       text-decoration: none;
       color: var(--ink);
       border-bottom: 1px solid rgba(0, 0, 0, .08);
       font-family: "Cormorant Garamond", serif;
       font-weight: 400;
-      font-size: clamp(17px, 2.1vw, 21px);
+      font-size: clamp(15px, 2.1vw, 21px);
       letter-spacing: .04em;
       transition: padding-left 380ms cubic-bezier(.2, .7, .1, 1),
         color 200ms ease;
