@@ -97,7 +97,7 @@ p,ul,ol { margin: 0; }
   text-decoration: none;
   padding: 4px 12px 4px 4px;
   border: 1px solid var(--line-2);
-  border-radius: 9999px;
+  border-radius: 12px;
   transition: border-color 200ms, background 200ms;
   flex-shrink: 0;
 }
