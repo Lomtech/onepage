@@ -61,13 +61,14 @@ p,ul,ol { margin: 0; }
   gap: 12px;
 }
 .brand {
-  font-weight: 800;
-  letter-spacing: .14em;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: -.005em;
   color: var(--ink);
   text-decoration: none;
+  white-space: nowrap;
 }
-.brand .dot { color: var(--gold); }
+@media (min-width: 480px) { .brand { font-size: 15px; } }
 
 .nav-back {
   font-size: 13px;
@@ -86,6 +87,42 @@ p,ul,ol { margin: 0; }
   color: var(--ink);
   border-color: var(--ink-faint);
   background: var(--bg-soft);
+}
+
+/* ── Osss Logo Button (osss.pro Brand) ─────────────────── */
+.osss-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 4px 12px 4px 4px;
+  border: 1px solid var(--line-2);
+  border-radius: 9999px;
+  transition: border-color 200ms, background 200ms;
+  flex-shrink: 0;
+}
+.osss-button:hover {
+  border-color: var(--gold-2);
+  background: var(--gold-faint);
+}
+.osss-logomark {
+  width: 26px;
+  height: 26px;
+  background: var(--gold-2);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #09090b;
+  flex-shrink: 0;
+  transition: background 200ms;
+}
+.osss-button:hover .osss-logomark { background: var(--gold); }
+.osss-logomark svg { width: 13px; height: 10px; }
+.osss-name {
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: -.02em;
+  color: var(--ink);
 }
 
 /* ── Layout ────────────────────────────────────────────── */
