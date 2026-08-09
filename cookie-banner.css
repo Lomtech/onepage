@@ -1,0 +1,101 @@
+/* ────────────────────────────────────────────────────────
+   Einwilligungs-Banner für die Besucherstatistik.
+   Eigenständig: setzt keine Variablen aus styles.css voraus,
+   damit es auch auf der index.html mit ihrem Inline-CSS trägt.
+   ──────────────────────────────────────────────────────── */
+
+.cc-banner {
+  position: fixed;
+  z-index: 9999;
+  inset: auto 0 0 0;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 940px;
+  margin: 0 auto 16px;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(9, 9, 11, 0.14);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #09090b;
+  line-height: 1.5;
+  animation: cc-in 0.28s ease-out both;
+}
+
+@media (max-width: 720px) {
+  .cc-banner {
+    inset: auto 12px 0 12px;
+    padding: 18px;
+  }
+}
+
+@keyframes cc-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-banner { animation: none; }
+}
+
+.cc-text {
+  flex: 1 1 380px;
+  margin: 0;
+  font-size: 14px;
+  color: #52525b;
+}
+
+.cc-text strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #09090b;
+}
+
+.cc-text a {
+  color: #d97706;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cc-actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.cc-btn {
+  padding: 11px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.cc-btn:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.cc-accept {
+  background: #09090b;
+  color: #ffffff;
+}
+
+.cc-accept:hover { background: #27272a; }
+
+.cc-decline {
+  background: #ffffff;
+  color: #52525b;
+  border-color: #e4e4e7;
+}
+
+.cc-decline:hover { background: #fafaf9; }
