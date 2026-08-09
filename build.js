@@ -22,6 +22,10 @@ console.log("   ✓ index.html");
 fs.copyFileSync("styles.css", path.join(buildDir, "styles.css"));
 console.log("   ✓ styles.css");
 
+// === Kopiere Font-CSS (lokales Inter, kein Google-CDN) ===
+fs.copyFileSync("fonts.css", path.join(buildDir, "fonts.css"));
+console.log("   ✓ fonts.css");
+
 // === Kopiere Cookie-Banner CSS ===
 if (fs.existsSync("cookie-banner.css")) {
   fs.copyFileSync(
@@ -51,19 +55,25 @@ if (fs.existsSync("dashboard.css")) {
   console.warn("   ⚠️ dashboard.css nicht gefunden");
 }
 
-// === Kopiere Assets (inkl. avatar.jpg) ===
-if (fs.existsSync(assetsDir)) {
-  if (!fs.existsSync(buildAssetsDir)) {
-    fs.mkdirSync(buildAssetsDir, { recursive: true });
-  }
+// === Kopiere Assets rekursiv (inkl. assets/fonts/) ===
+function copyDir(srcDir, destDir, label) {
+  fs.mkdirSync(destDir, { recursive: true });
 
-  const assetFiles = fs.readdirSync(assetsDir);
-  assetFiles.forEach((file) => {
-    const srcPath = path.join(assetsDir, file);
-    const destPath = path.join(buildAssetsDir, file);
-    fs.copyFileSync(srcPath, destPath);
-    console.log(`   ✓ assets/${file}`);
+  fs.readdirSync(srcDir, { withFileTypes: true }).forEach((entry) => {
+    const srcPath = path.join(srcDir, entry.name);
+    const destPath = path.join(destDir, entry.name);
+
+    if (entry.isDirectory()) {
+      copyDir(srcPath, destPath, `${label}${entry.name}/`);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+      console.log(`   ✓ ${label}${entry.name}`);
+    }
   });
+}
+
+if (fs.existsSync(assetsDir)) {
+  copyDir(assetsDir, buildAssetsDir, "assets/");
 } else {
   console.warn("   ⚠️ assets/ Ordner nicht vorhanden");
 }
@@ -122,6 +132,7 @@ console.log("\n📦 Build-Inhalt:");
 console.log("   dist/");
 console.log("   ├── index.html");
 console.log("   ├── styles.css");
+console.log("   ├── fonts.css");
 console.log("   ├── cookie-banner.css");
 console.log("   ├── app.js");
 console.log("   ├── cookie-consent.js");

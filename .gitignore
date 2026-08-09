@@ -1,4 +1,3 @@
-cat > /home/claude/.gitignore << 'EOF'
 # OS
 .DS_Store
 Thumbs.db
@@ -12,11 +11,15 @@ Thumbs.db
 # Logs
 *.log
 
+# Dependencies
+node_modules/
+
 # Environment
 .env
 .env.local
 
+# Build-Output (wird von Netlify aus den Quellen erzeugt)
+dist/
+
 # Netlify
 .netlify/
-EOF
-echo "✅ .gitignore created"
